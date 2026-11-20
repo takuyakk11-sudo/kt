@@ -4,36 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>アプリメニュー</title>
-  <!-- Google Fontsの読み込み（丸みのあるモダンなフォント） -->
+  <!-- Google Fontsの読み込み（視認性の高いモダンなフォント） -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --text-main: #1e293b;
-      --text-sub: #64748b;
-      --accent-color: #0ea5e9;
-      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-      --shadow-hover: 0 10px 25px -5px rgba(14, 165, 233, 0.15), 0 8px 10px -6px rgba(14, 165, 233, 0.1);
+      --bg-color: #f8f9fa;       /* わずかにグレーがかった白（目に優しい背景） */
+      --card-bg: #ffffff;        /* カードの純白 */
+      --text-main: #111111;      /* 濃い黒（メインテキスト） */
+      --text-sub: #555555;       /* ダークグレー（説明文） */
+      --border-color: #e0e0e0;   /* 境界線の薄いグレー */
+      --accent-black: #111111;   /* アクセント用の黒 */
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      /* スマホでタップした時の不要な青い枠を消す */
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      font-family: 'M PLUS Rounded 1c', sans-serif;
-      background: var(--bg-gradient);
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: var(--bg-color);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 24px 16px;
+      line-height: 1.5;
     }
 
     .container {
@@ -43,19 +45,19 @@
 
     header {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     h1 {
-      font-size: 1.75rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       color: var(--text-main);
       margin-bottom: 8px;
     }
 
     .subtitle {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-sub);
     }
 
@@ -63,40 +65,47 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     a.menu-card {
       display: flex;
       align-items: center;
-      padding: 18px 20px;
+      padding: 20px 18px;
       background-color: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 16px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 14px;
       text-decoration: none;
       color: inherit;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    /* ホバー時の浮き上がり＆光るアニメーション */
-    a.menu-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-      border-color: rgba(14, 165, 233, 0.3);
+    /* PCでのホバー時（黒枠が強調される） */
+    @media (hover: hover) {
+      a.menu-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--accent-black);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      }
+      a.menu-card:hover .arrow {
+        transform: translateX(4px);
+        color: var(--accent-black);
+      }
     }
 
+    /* スマホでタップした瞬間の押し込み反応 */
     a.menu-card:active {
-      transform: translateY(-1px);
+      transform: scale(0.98);
+      background-color: #f2f2f2;
+      border-color: var(--accent-black);
     }
 
     .icon-box {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       border-radius: 12px;
+      background-color: #111111; /* 黒背景 */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -104,12 +113,6 @@
       margin-right: 16px;
       flex-shrink: 0;
     }
-
-    /* 各アイテムごとのアイコン背景色 */
-    .icon-breath { background-color: #e0f2fe; color: #0284c7; }
-    .icon-game-pc { background-color: #dcfce7; color: #16a34a; }
-    .icon-game-sp { background-color: #fef3c7; color: #d97706; }
-    .icon-other   { background-color: #f1f5f9; color: #475569; }
 
     .card-content {
       flex-grow: 1;
@@ -120,6 +123,7 @@
       font-weight: 700;
       margin-bottom: 4px;
       display: block;
+      color: var(--text-main);
     }
 
     .card-desc {
@@ -128,17 +132,26 @@
       display: block;
     }
 
+    /* スマホでもひと目で「リンク（押せる）」と分かるバッジ風矢印 */
     .arrow {
-      color: #cbd5e1;
-      font-size: 1.2rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: #f0f0f0;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
       font-weight: bold;
       margin-left: 12px;
-      transition: transform 0.25s ease, color 0.25s ease;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
     }
 
-    a.menu-card:hover .arrow {
-      transform: translateX(4px);
-      color: var(--accent-color);
+    a.menu-card:active .arrow {
+      background-color: var(--accent-black);
+      color: #ffffff;
     }
   </style>
 </head>
@@ -147,13 +160,13 @@
   <div class="container">
     <header>
       <h1>アプリメニュー</h1>
-      <p class="subtitle">遊びたい・使いたいコンテンツを選んでください</p>
+      <p class="subtitle">使いたいコンテンツをタップしてください</p>
     </header>
 
     <ul>
       <li>
         <a href="Deep_Breath-Ver3.html" class="menu-card">
-          <div class="icon-box icon-breath">🌿</div>
+          <div class="icon-box">🌿</div>
           <div class="card-content">
             <span class="card-title">深呼吸</span>
             <span class="card-desc">リラックス＆呼吸リズムガイド</span>
@@ -164,7 +177,7 @@
 
       <li>
         <a href="waniwani2.html" class="menu-card">
-          <div class="icon-box icon-game-pc">🐊</div>
+          <div class="icon-box">🐊</div>
           <div class="card-content">
             <span class="card-title">ワニワニ・リバーシューター</span>
             <span class="card-desc">PCブラウザ向けアクションゲーム</span>
@@ -175,7 +188,7 @@
 
       <li>
         <a href="waniwani-sumaho3.html" class="menu-card">
-          <div class="icon-box icon-game-sp">📱</div>
+          <div class="icon-box">📱</div>
           <div class="card-content">
             <span class="card-title">ワニワニ・リバーシューター</span>
             <span class="card-desc">スマホ版（横画面プレイ推奨）</span>
@@ -186,7 +199,7 @@
 
       <li>
         <a href="https://example.com/4" class="menu-card">
-          <div class="icon-box icon-other">🔗</div>
+          <div class="icon-box">🔗</div>
           <div class="card-content">
             <span class="card-title">リンク4</span>
             <span class="card-desc">外部リンク・その他のコンテンツ</span>
