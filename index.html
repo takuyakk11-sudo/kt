@@ -3,26 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>アプリメニュー</title>
-  <!-- Google Fontsの読み込み（視認性の高いモダンなフォント） -->
+  <title>App Menu</title>
+  <!-- Google Fontsの読み込み（洗練された欧文フォント ＆ Noto Sans JP） -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg-color: #f8f9fa;       /* わずかにグレーがかった白（目に優しい背景） */
-      --card-bg: #ffffff;        /* カードの純白 */
-      --text-main: #111111;      /* 濃い黒（メインテキスト） */
-      --text-sub: #555555;       /* ダークグレー（説明文） */
-      --border-color: #e0e0e0;   /* 境界線の薄いグレー */
-      --accent-black: #111111;   /* アクセント用の黒 */
+      /* ▼ ここで背景色を変更できます（現在は上品な生成り色） */
+      --bg-color: #f2efe9;       
+      
+      --card-bg: #ffffff;        /* ピュアホワイト */
+      --text-main: #1a1a1a;      /* 深い黒 */
+      --text-sub: #777777;       /* 絶妙なニュアンスのグレー */
+      --border-color: #e6e2db;   /* 背景色に合わせた繊細な境界線 */
+      --accent-dark: #111111;    /* ホバー時のシャープな黒 */
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      /* スマホでタップした時の不要な青い枠を消す */
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -34,82 +36,86 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px 16px;
-      line-height: 1.5;
+      padding: 32px 16px;
+      line-height: 1.6;
     }
 
     .container {
       width: 100%;
-      max-width: 480px;
+      max-width: 440px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 36px;
+    }
+
+    /* 英語のおしゃれなサブタイトル風フォント */
+    .brand-tag {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      letter-spacing: 0.15em;
+      margin-bottom: 4px;
     }
 
     h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       color: var(--text-main);
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      font-size: 0.85rem;
-      color: var(--text-sub);
     }
 
     ul {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     a.menu-card {
       display: flex;
       align-items: center;
-      padding: 20px 18px;
+      padding: 18px 20px;
       background-color: var(--card-bg);
-      border: 1.5px solid var(--border-color);
-      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       text-decoration: none;
       color: inherit;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-      transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
 
-    /* PCでのホバー時（黒枠が強調される） */
+    /* ホバー時のリッチな浮き上がり効果（PC） */
     @media (hover: hover) {
       a.menu-card:hover {
-        transform: translateY(-2px);
-        border-color: var(--accent-black);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        transform: translateY(-3px);
+        border-color: var(--accent-dark);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
       }
       a.menu-card:hover .arrow {
         transform: translateX(4px);
-        color: var(--accent-black);
+        color: var(--accent-dark);
       }
     }
 
-    /* スマホでタップした瞬間の押し込み反応 */
+    /* タップ時の反応（スマホ） */
     a.menu-card:active {
       transform: scale(0.98);
-      background-color: #f2f2f2;
-      border-color: var(--accent-black);
+      background-color: #fafafa;
     }
 
     .icon-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 12px;
-      background-color: #111111; /* 黒背景 */
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background-color: #141414;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       margin-right: 16px;
       flex-shrink: 0;
     }
@@ -119,39 +125,27 @@
     }
 
     .card-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 4px;
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 2px;
       display: block;
+      letter-spacing: 0.03em;
       color: var(--text-main);
     }
 
     .card-desc {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-sub);
       display: block;
     }
 
-    /* スマホでもひと目で「リンク（押せる）」と分かるバッジ風矢印 */
+    /* ミニマルな矢印デザイン */
     .arrow {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background-color: #f0f0f0;
-      color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1rem;
-      font-weight: bold;
+      color: #cccccc;
+      font-size: 1.1rem;
+      font-weight: 300;
       margin-left: 12px;
-      flex-shrink: 0;
-      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-    }
-
-    a.menu-card:active .arrow {
-      background-color: var(--accent-black);
-      color: #ffffff;
+      transition: transform 0.3s ease, color 0.3s ease;
     }
   </style>
 </head>
@@ -159,8 +153,8 @@
 
   <div class="container">
     <header>
+      <div class="brand-tag">- Selection -</div>
       <h1>アプリメニュー</h1>
-      <p class="subtitle">使いたいコンテンツをタップしてください</p>
     </header>
 
     <ul>
